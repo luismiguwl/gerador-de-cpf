@@ -60,21 +60,13 @@ public class CPF {
         int indice = 0;
         String cpfComMascara = "";
 
-        while (cpfComMascara.replace(".", "").length() != 9) {
-            cpfComMascara += cpf.charAt(indice);
-
-            if (cpfComMascara.replace(".", "").length() % 3 == 0) {
-                if (cpfComMascara.replace(".", "").length() != 9) {
-                    cpfComMascara += ".";
-                }
-            }
-
-            indice++;
+        try {
+            MaskFormatter mf = new MaskFormatter("###.###.###-##");
+            mf.setValueContainsLiteralCharacters(false);
+            cpfComMascara = mf.valueToString(cpf);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-
-        cpfComMascara += "-";
-        cpfComMascara += cpf.charAt(indice);
-        cpfComMascara += cpf.charAt(indice + 1);
 
         return cpfComMascara;
     }
