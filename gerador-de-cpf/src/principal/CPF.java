@@ -9,7 +9,7 @@ public class CPF {
         "Ceará, Maranhão e Piauí", "Pernambuco, Rio Grande do Norte, Paraíba e Alagoas", "Bahia e Sergipe",
         "Minas Gerais", "Rio de Janeiro e Espírito Santo", "São Paulo", "Paraná e Santa Catarina"};
 
-    static String gerarCPF() {
+    public static String gerarCPF() {
         String CPF;
         CPF = gerarNovePrimeirosNumeros();
         CPF += calcularDigito(CPF, 10);
@@ -24,7 +24,7 @@ public class CPF {
         return CPF;
     }
 
-    static String gerarNovePrimeirosNumeros() {
+    private static String gerarNovePrimeirosNumeros() {
         String cpf = "";
 
         while (cpf.length() != 9) {
@@ -34,12 +34,12 @@ public class CPF {
         return cpf;
     }
 
-    static int gerarNumeroAleatorio() {
+    private static int gerarNumeroAleatorio() {
         Random random = new Random();
         return random.nextInt(10);
     }
 
-    static int calcularDigito(String cpf, int maximo) {
+    private static int calcularDigito(String cpf, int maximo) {
         int restoDaDivisao = multiplicarNumeros(cpf, maximo) % 11;
 
         if (restoDaDivisao == 0 || restoDaDivisao == 1) {
@@ -49,7 +49,7 @@ public class CPF {
         return 11 - restoDaDivisao;
     }
 
-    static int multiplicarNumeros(String cpf, int maximo) {
+    private static int multiplicarNumeros(String cpf, int maximo) {
         int resultadoDaSomaDaMultiplicacao = 0;
         int indiceDoCpf = 0;
 
@@ -61,7 +61,7 @@ public class CPF {
         return resultadoDaSomaDaMultiplicacao;
     }
 
-    static String inserirMascara(String cpf) {
+    private static String inserirMascara(String cpf) {
         int indice = 0;
         String cpfComMascara = "";
 
@@ -76,17 +76,17 @@ public class CPF {
         return cpfComMascara;
     }
 
-    static String obterEstadoDoCPF(String cpf) {
+    private static String obterEstadoDoCPF(String cpf) {
         String unidadeFederativaDoCPF = Character.toString(cpf.replace("-", "").replace(".", "").charAt(8));
         return unidadesFederativas[Integer.parseInt(unidadeFederativaDoCPF)];
     }
 
-    static String obterCodigoDoEstado(String cpf) {
+    private static String obterCodigoDoEstado(String cpf) {
         String codigoDoEstado = Character.toString(cpf.replace("-", "").replace(".", "").charAt(8));
         return codigoDoEstado;
     }
 
-    static void exibirCodigoDeCadaEstado() {
+    private static void exibirCodigoDeCadaEstado() {
         System.out.println("\nCada estado tem um código para o CPF gerado\n"
                 + "O estado em que o CPF foi gerado é representado pelo terceiro código da direita para a esquerda\n"
                 + "\nCódigo de cada estado");
